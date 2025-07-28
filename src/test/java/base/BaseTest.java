@@ -32,6 +32,7 @@ public class BaseTest {
     public Page page;
     public final List<String> consoleLogs = new ArrayList<>();
 
+   //To fetch data from config.properties
     public String fetchDataFromConfigFile(String key) {
         Properties properties = new Properties();
         try (FileInputStream fis = new FileInputStream("src/test/java/resources/config.properties")) {
