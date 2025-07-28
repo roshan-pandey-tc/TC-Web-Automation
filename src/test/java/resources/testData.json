@@ -1,0 +1,18 @@
+{
+  "tfbWebTestData" : [
+    {
+    "userName" : "akhilesh.singh+prodadmin1@truecaller.com",
+    "password" : "Qwerty@123",
+    "businessName" : "Test",
+    "aboutBusiness": "This is an automated test"
+    }
+  ],
+  "adsWebTestData" : [
+    {
+      "userName" : "dmin1@truecaller.com",
+      "password" : "ty@123",
+      "businessName" : "Test_Autom",
+      "aboutBusiness": "utomated test"
+    }
+  ]
+}

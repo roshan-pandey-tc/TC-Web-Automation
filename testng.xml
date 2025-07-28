@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="SampleSuite">
+    <listeners>
+        <listener class-name="io.qameta.allure.testng.AllureTestNg"/>
+        <listener class-name="utility.TestListener"/>
+        <listener class-name="utility.RetryTransformer"/>
+    </listeners>
+    <test name="SampleTest">
+        <classes>
+            <class name="test.SampleTest"/>
+        </classes>
+    </test>
+</suite>
