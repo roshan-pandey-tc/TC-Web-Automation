@@ -7,6 +7,7 @@ import org.testng.annotations.ITestAnnotation;
 
 public class RetryTransformer implements IAnnotationTransformer {
     @Override
+    @SuppressWarnings({ "rawtypes" })
     public void transform(ITestAnnotation annotation, Class testClass,
                           Constructor testConstructor, Method testMethod) {
         System.out.println("🔁 Setting RetryAnalyzer for: " + testMethod);

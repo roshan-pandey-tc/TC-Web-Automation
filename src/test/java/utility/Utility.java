@@ -2,6 +2,8 @@ package utility;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.qameta.allure.Allure;
+import org.testng.Assert;
 
 import java.io.File;
 import java.io.IOException;
@@ -43,5 +45,11 @@ public class Utility {
     public static String getCurrentDateTime() {
         return java.time.LocalDateTime.now()
                 .format(java.time.format.DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
+    }
+    public static <T> void allureStepAssert(T actual, T expected) {
+        Allure.step("Verify that expected: '" + expected + "' equals actual: '" + actual + "'",
+                (Allure.ThrowableRunnableVoid) () -> {
+                    Assert.assertEquals(actual, expected);
+                });
     }
 }

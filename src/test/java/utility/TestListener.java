@@ -39,7 +39,6 @@ public class TestListener implements ITestListener {
                 ByteArrayInputStream logStream = new ByteArrayInputStream(logBuilder.toString().getBytes(StandardCharsets.UTF_8));
                 Allure.addAttachment("Browser Console Logs - " + testName, "text/plain", logStream,".log");
             }
-
             System.out.println("✅ Attached screenshot and console logs for: " + testName);
         } catch (Exception e) {
             System.err.println("❌ Failed to capture screenshot/logs for Allure:");

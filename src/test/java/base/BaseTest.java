@@ -2,11 +2,9 @@ package base;
 
 import com.microsoft.playwright.*;
 
-import io.qameta.allure.testng.AllureTestNg;
-import org.testng.ITestResult;
 import org.testng.annotations.*;
+
 import utility.RetryTransformer;
-import utility.TestListener;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,11 +16,9 @@ This is added to run the listeners by default, if it's not added the screenshot 
  if the test is run via IDE UI
 */
 @Listeners({
-        //io.qameta.allure.testng.AllureTestNg.class,
-        //utility.TestListener.class,
-        TestListener.class,
-        AllureTestNg.class,
-        RetryTransformer.class
+        io.qameta.allure.testng.AllureTestNg.class,
+        utility.TestListener.class,
+        RetryTransformer.class,
 })
 public class BaseTest {
 
@@ -75,20 +71,15 @@ public class BaseTest {
         String url = moduleUrlMap.get(moduleName);
         if (url == null) throw new IllegalArgumentException("Unsupported module: " + moduleName);
         page.navigate(url);
-
-        //page.onConsoleMessage(msg -> consoleLogs.add(msg.type() + ": " + msg.text()));
     }
 
     @AfterSuite(alwaysRun = true)
-    public void tearDown(ITestResult result) {
+    public void tearDownAndGenerateReport() {
         if (page != null) page.close();
         if (context != null) context.close();
         if (browser != null) browser.close();
         if (playwright != null) playwright.close();
-    }
 
-    @AfterSuite(alwaysRun = true)
-    public void generateAllureReport() {
         try {
             File resultsFolder = new File("target/allure-results");
             if (!resultsFolder.exists()) {
@@ -108,7 +99,6 @@ public class BaseTest {
             } else {
                 System.err.println("❌ Failed to generate Allure report. Exit code: " + exitCode);
             }
-
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }

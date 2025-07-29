@@ -2,32 +2,33 @@ package page;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
-
-import java.nio.file.Paths;
+import page.utility.WebActions;
 
 public class LandingPage {
-
-    private final Page page;
-    private final Locator btn_signIn;
-    private final Locator txt_userName;
-    private final Locator txt_password;
-    private final Locator btn_login;
-    private final Locator dropDown_businessIdentity;
-    private final Locator btn_businessPage;
-    private final Locator btn_createBusinessPage;
-    private final Locator txt_businessPageName;
-    private final Locator btn_uploadPic1;
-    private final Locator btn_uploadPic2;
-    private final Locator btn_uploadPic3;
-    private final Locator txt_brandDesc;
-    private final Locator btn_save;
-    private final Locator btn_confirm;
-    private final Locator btn_threeDots;
-    private final Locator btn_logout;
+    WebActions actions = new WebActions();
+    public final Page page;
+    public final Locator btn_getInTouch;
+    public final Locator btn_signIn;
+    public final Locator txt_userName;
+    public final Locator txt_password;
+    public final Locator btn_login;
+    public final Locator dropDown_businessIdentity;
+    public final Locator btn_businessPage;
+    public final Locator btn_createBusinessPage;
+    public final Locator txt_businessPageName;
+    public final Locator btn_uploadPic1;
+    public final Locator btn_uploadPic2;
+    public final Locator btn_uploadPic3;
+    public final Locator txt_brandDesc;
+    public final Locator btn_save;
+    public final Locator btn_confirm;
+    public final Locator btn_threeDots;
+    public final Locator btn_logout;
 
     public LandingPage(Page page) {
         this.page = page;
-        this.btn_signIn = page.locator("a[href='/signin1']");
+        this.btn_getInTouch = page.locator("//button[@title='Get in touch' and contains(text(),'Get in')]");
+        this.btn_signIn = page.locator("a[href='/signin']");
         this.txt_userName = page.locator("//label[@for='input-21']/parent::div//input");
         this.txt_password = page.locator("//label[@for='input-24']/parent::div//input");
         this.btn_login = page.locator("//div[contains(text(),'Login')]");
@@ -44,50 +45,52 @@ public class LandingPage {
         this.btn_threeDots = page.locator("//button[@type='button']//span//i[@class='v-icon notranslate mdi mdi-dots-horizontal theme--light']");
         this.btn_logout = page.locator("//div[text()='Logout']");
     }
-
+    public boolean isSignInBtnVisible(){
+        return actions.isVisible(btn_signIn);
+    }
     public void clickSignInBtn(){
-        btn_signIn.click();
+        actions.clickElement(btn_signIn);
     }
     public void enterUserName(String value){
-        txt_userName.fill(value);
+        actions.sendKeys(txt_userName,value);
     }
     public void enterPass(String value){
-        txt_password.fill(value);
+        actions.sendKeys(txt_password,value);
     }
     public void clickLogInBtn(){
-        btn_login.click();
+       actions.clickElement(btn_login);
     }
     public void clickBusinessIdentityDropDown(){
-        dropDown_businessIdentity.click();
+        actions.clickElement(dropDown_businessIdentity);
     }
     public void clickBusinessPageBtn(){
-        btn_businessPage.click();
+        actions.clickElement(btn_businessPage);
     }
     public void clickCreateBusinessPageBtn(){
-        btn_createBusinessPage.click();
+        actions.clickElement(btn_createBusinessPage);
     }
     public void enterBusinessPageName(String name){
-        txt_businessPageName.fill("");
-        txt_businessPageName.fill(name);
+       actions.sendKeys(txt_businessPageName,name);
     }
+
     public void uploadBusinessPic(){
-        btn_uploadPic1.setInputFiles(Paths.get("src/test/java/resources/files/Swiggy1.jpeg"));
-        btn_uploadPic2.setInputFiles(Paths.get("src/test/java/resources/files/Swiggy2.jpeg"));
-        btn_uploadPic3.setInputFiles(Paths.get("src/test/java/resources/files/Swiggy3.png"));
+        actions.uploadFiles("src/test/java/resources/files/Swiggy1.jpeg",btn_uploadPic1);
+        actions.uploadFiles("src/test/java/resources/files/Swiggy2.jpeg",btn_uploadPic1);
+        actions.uploadFiles("src/test/java/resources/files/Swiggy3.png",btn_uploadPic1);
     }
     public void enterBrandDescription(String desc){
-        txt_brandDesc.fill(desc);
+        actions.sendKeys(txt_brandDesc,desc);
     }
     public void clickSaveBtn(){
-        btn_save.click();
+        actions.clickElement(btn_save);
     }
     public void clickConfirmBtn(){
-        btn_confirm.click();
+        actions.clickElement(btn_confirm);
     }
     public void clickThreeDotsBtn(){
-        btn_threeDots.click();
+        actions.clickElement(btn_threeDots);
     }
     public void clickLogoutBtn(){
-        btn_logout.click();
+        actions.clickElement(btn_logout);
     }
 }
